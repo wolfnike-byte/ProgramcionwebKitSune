@@ -1,0 +1,115 @@
+.contacto-wrapper {
+  background-color: #000000;
+  color: white;
+  padding-top: 140px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contacto-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.main-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.highlight {
+  color: #ff6600; /* Naranja Kitsune */
+}
+
+.subtitle {
+  color: #666;
+  max-width: 600px;
+  margin: 15px auto 0;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #1a1a1a;
+  padding: 50px 30px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.info-card:hover {
+  border-color: #ff6600;
+  background: rgba(255, 102, 0, 0.03);
+  transform: translateY(-10px);
+}
+
+.icon-box {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  display: block;
+}
+
+.info-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.info-card p {
+  color: #888;
+  font-size: 0.95rem;
+  line-height: 1.6; /* Esto da aire entre las líneas de la dirección */
+  margin-bottom: 25px;
+  min-height: 3em; /* Mantiene las tarjetas alineadas aunque el texto varíe */
+}
+
+.data-link {
+  display: block;
+  color: #ff6600;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+
+.data-link:hover {
+  color: #ffffff;
+}
+
+.footer-simple {
+  margin-top: auto;
+  padding: 40px 0;
+  text-align: center;
+  border-top: 1px solid #111;
+  color: #333;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+}
+.contact-link {
+    display: block;
+    color: #ff6600; /* El naranja de Kitsune */
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-decoration: none;
+    margin: 15px 0 5px;
+    transition: color 0.3s;
+}
+
+.contact-link:hover {
+    color: #c5a059; /* Cambia a dorado al pasar el mouse */
+}
+
+.schedule {
+    color: #666;
+    font-size: 0.9rem;
+    display: block;
+}

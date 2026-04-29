@@ -1,0 +1,154 @@
+/* Contenedor principal para que respete el navbar */
+.menu-container {
+  padding-top: 80px; /* Ajústalo a la altura de tu menú superior */
+  min-height: 100vh;
+  padding-inline: 5%; /* Da un respiro a los lados */
+  box-sizing: border-box;
+}
+
+.titulo-seccion {
+  color: white;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* LA CUADRÍCULA: La magia para que se acomoden solos */
+.grid-platillos {
+  display: grid;
+  /* Esto hace que las tarjetas midan mínimo 300px y se acomoden solas dependiendo del tamaño de la pantalla */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px; /* Espacio entre tarjetas */
+}
+
+/* EL RECUADRO DEL PLATILLO */
+.tarjeta-platillo {
+  background-color: #1a1a1a; /* Fondo oscuro casi negro */
+  border: 1px solid #333;
+  border-radius: 12px; /* Bordes redondeados */
+  overflow: hidden; /* Evita que la foto se salga de las esquinas curvas */
+  display: flex;
+  flex-direction: column;
+}
+
+/* LA FOTO */
+.imagen-contenedor {
+  width: 100%;
+  height: 220px;
+}
+
+.imagen-contenedor img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Corta la imagen bonito para que no se aplaste */
+}
+
+/* LA INFORMACIÓN */
+.info-platillo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Empuja el botón al fondo si la descripción es corta */
+}
+
+.info-platillo h2 {
+  color: white;
+  margin: 0 0 10px 0;
+  font-size: 1.5rem;
+}
+
+.descripcion {
+  color: #aaa;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+/* PRECIO Y BOTÓN JUNTOS */
+.compra-contenedor {
+  margin-top: auto; /* Empuja esto hasta abajo de la tarjeta */
+  display: flex;
+  justify-content: space-between; /* Uno a la izquierda, otro a la derecha */
+  align-items: center;
+}
+
+.precio {
+  color: #ff6600; /* Color naranja asumiendo tu temática */
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.btn-carrito {
+  background-color: transparent;
+  color: #ff6600;
+  border: 2px solid #ff6600;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-carrito:hover {
+  background-color: #ff6600;
+  color: white;
+}
+.seccion-menu {
+  margin-bottom: 60px; /* Espacio grande entre una categoría y otra */
+}
+
+.titulo-categoria {
+  color: #ff6600; /* Naranja para resaltar la categoría */
+  font-size: 2rem;
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+/* ESTILOS PARA LA BARRA DE PESTAÑAS */
+.tabs-categorias {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+  flex-wrap: wrap; /* Si hay muchas categorías, bajan a la siguiente línea en celulares */
+}
+
+.tab-btn {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #555;
+  padding: 10px 20px;
+  border-radius: 25px; /* Diseño de "píldora" */
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+  border-color: #ff6600;
+  color: #ff6600;
+}
+
+/* El estilo de la pestaña que está seleccionada actualmente */
+.tab-btn.activo {
+  background-color: #ff6600;
+  color: white;
+  border-color: #ff6600;
+  font-weight: bold;
+}
+
+/* ANIMACIÓN SUAVE AL CAMBIAR DE PESTAÑA */
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}

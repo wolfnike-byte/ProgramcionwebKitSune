@@ -1,0 +1,12 @@
+<app-navbar (toggleCart)="toggleCart()"></app-navbar>
+
+<main>
+  <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+
+</main>
+
+<app-cart-drawer 
+  [isOpen]="isCartOpen" 
+  (close)="isCartOpen = false">
+</app-cart-drawer>

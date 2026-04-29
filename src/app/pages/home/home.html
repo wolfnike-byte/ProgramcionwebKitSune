@@ -1,0 +1,34 @@
+<main class="home-container">
+  <section class="hero-galeria">
+    
+  @if (slides.length > 0) {
+      <div class="imagen-principal-container">
+        <img [src]="slides[activeSlideIndex].url" [alt]="slides[activeSlideIndex].title" class="imagen-principal">
+        <div class="texto-principal">
+          
+          @if (slides[activeSlideIndex].title !== 'OFERTAS') {
+            <h1>{{ slides[activeSlideIndex].title }}</h1>
+          }
+          </div>
+      </div>
+    }
+
+    @if (slides.length > 0) {
+      <div class="miniaturas-container">
+        
+        @for (s of slides; track $index) {
+          <div class="miniatura" 
+               [class.activa]="$index === activeSlideIndex"
+               (click)="seleccionarImagen($index)">
+            
+            <img [src]="s.url" [alt]="s.title" class="miniatura-img">
+            <span class="miniatura-titulo">{{ s.title }}</span>
+            
+          </div>
+        }
+
+      </div>
+    }
+
+  </section>
+</main>
