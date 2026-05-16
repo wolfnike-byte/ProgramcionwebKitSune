@@ -1,0 +1,249 @@
+/* =========================================
+   KITSUNE - DESIGN SYSTEM
+   ========================================= */
+
+:root {
+    /* Paleta de Colores */
+    --primary-color: #FF5E00;   /* Naranja Kitsune */
+    --bg-dark: #0A0A0A;        /* Negro Azabache */
+    --bg-card: #141414;        /* Gris Carbono */
+    --text-main: #FFFFFF;      /* Blanco Puro */
+    --text-muted: #A0A0A0;     /* Gris Tenue */
+    --accent-gold: #D4AF37;    /* Dorado Detalle */
+    
+    /* Tipografías */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Poppins', sans-serif;
+    
+    /* Espaciado y Transiciones */
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --container-padding: 0 10%;
+}
+
+/* Reset Profesional */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    /* Fondo con degradado oscuro para legibilidad + la imagen */
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.78)),
+    url('/fondo-kitsune.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: white;
+
+}
+.bg-card-glass {
+    background: rgba(20, 20, 20, 0.9); /* Fondo oscuro semitransparente */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque moderno */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+}
+
+/* Tipografía Global */
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Componentes de Utilidad Reutilizables */
+.container {
+    padding: var(--container-padding);
+}
+
+.btn-kitsune {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    border: 1px solid var(--primary-color);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-kitsune:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--accent-gold);
+    margin: 15px auto;
+}
+/* Actualización del tamaño del logo en style.css */
+/* Aseguramos que el logo tenga un margen superior para bajarlo un poco más */
+.logo {
+    margin-top: 15px; 
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 140px; /* Mantengo tu tamaño preferido */
+    width: auto;
+    transition: var(--transition);
+    filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.9));
+}
+
+/* Escalamiento del menú de navegación */
+nav ul li a {
+    font-size: 1.1rem; /* Aumentamos de 0.8rem a 1.1rem */
+    font-weight: 600;  /* Un poco más de grosor para que destaque sobre el fondo */
+    text-transform: uppercase;
+    letter-spacing: 3px; /* Espaciado elegante entre letras */
+    padding: 10px 15px;  /* Área de clic más grande */
+    transition: var(--transition);
+}
+
+/* Efecto hover para el menú */
+nav ul li a:hover {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Ajuste de espaciado entre los elementos de la lista */
+nav ul {
+    gap: 50px; /* Aumentamos el espacio entre INICIO, MENÚ, etc. */
+}
+/* --- ESTILOS DEL CARRUSEL --- */
+
+/* Contenedor principal que oculta lo que se desborda */
+.carrusel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+}
+
+/* La pista (track) que se mueve. Calculamos el ancho total (6 originales + 3 duplicadas) * 350px de ancho */
+.carrusel-track {
+    display: flex;
+    gap: 20px;
+    width: calc((6 + 3) * 370px); /* 350px img + 20px gap */
+    animation: scrollInfinito 30s linear infinite; /* 30 segundos por vuelta completa */
+    will-change: transform; /* Optimización de rendimiento */
+}
+
+/* Evitamos que la animación se detenga si el usuario interactúa */
+.carrusel-track:hover {
+    animation-play-state: paused;
+}
+
+/* Estilos para cada slide individual */
+.carrusel-slide {
+    flex: 0 0 350px; /* Ancho fijo para cada imagen */
+    height: 350px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+}
+
+/* Escalado sutil al hacer hover */
+.carrusel-slide:hover {
+    transform: scale(1.03);
+    border-color: var(--primary-color);
+}
+
+/* La imagen dentro del slide */
+.carrusel-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorte inteligente para que no se deforme */
+    display: block;
+}
+
+/* El pie de foto (Caption) sutil */
+.carrusel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    color: white;
+    padding: 20px 15px 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+/* --- ANIMACIÓN CSS --- */
+@keyframes scrollInfinito {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Desplazamos exactamente el ancho de las 6 imágenes originales (6 * 370px) */
+        transform: translateX(calc(-6 * 370px));
+    }
+}
+.carrusel-section {
+    /* Crea un desvanecimiento hacia el fondo negro del Hero */
+    background: linear-gradient(to bottom, transparent 80%, #050505 100%);
+}
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.78)),
+    url('/fondo-kitsune.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  color: white;
+}
+
+app-root,
+main {
+  background: transparent !important;
+}
+

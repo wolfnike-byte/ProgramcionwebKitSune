@@ -1,0 +1,21 @@
+﻿<nav class="navbar-container">
+  <div class="logo-section">
+    <a routerLink="/" class="logo-link">
+      <img src="/logo-kitsune.png" alt="Kitsune Logo" class="logo-icon">
+      <span class="logo-text-wrapper">Kitsune</span>
+    </a>
+  </div>
+
+  <div class="nav-actions">
+    <ul class="nav-links">
+      <li><a routerLink="/">INICIO</a></li>
+      <li><a routerLink="/menu">MENU</a></li>
+      <li><a routerLink="/contacto">CONTACTO</a></li>
+    </ul>
+
+    <div class="cart-trigger" (click)="toggleCarrito()">
+      <span class="cart-icon">🛒</span>
+      <span *ngIf="cartCount > 0" class="cart-badge">{{ cartCount }}</span>
+    </div>
+  </div>
+</nav>
