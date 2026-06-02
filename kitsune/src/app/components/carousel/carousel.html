@@ -1,0 +1,20 @@
+﻿<div
+  class="carousel-container"
+  (mouseenter)="stopAutoPlay()"
+  (mouseleave)="startAutoPlay()">
+
+  @if (slides.length > 0) {
+    <div #scrollContainer class="carousel-scroll" (scroll)="syncCurrentIndex()">
+      <div class="carousel-track">
+        @for (slide of slides; track $index) {
+          <div class="carousel-slide">
+            <img [src]="slide" class="slide-image" alt="Promocion Kitsune">
+          </div>
+        }
+      </div>
+    </div>
+
+    <button type="button" (click)="getPrev()" class="nav-btn prev" aria-label="Promocion anterior">‹</button>
+    <button type="button" (click)="getNext()" class="nav-btn next" aria-label="Promocion siguiente">›</button>
+  }
+</div>

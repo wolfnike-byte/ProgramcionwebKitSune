@@ -1,0 +1,29 @@
+<main class="login-page">
+  <section class="login-panel">
+    <span class="eyebrow">Acceso privado</span>
+    <h1>Administrador Kitsune</h1>
+    <p>Inicia sesion para modificar promociones, menu, contacto y pedidos.</p>
+
+    <form class="login-form" (ngSubmit)="login()">
+      <label>
+        Correo
+        <input type="email" name="email" [(ngModel)]="email" autocomplete="email" required>
+      </label>
+
+      <label>
+        Contrasena
+        <input type="password" name="password" [(ngModel)]="password" autocomplete="current-password" required>
+      </label>
+
+      @if (errorMessage) {
+        <div class="error-message">{{ errorMessage }}</div>
+      }
+
+      <button type="submit" [disabled]="loading || !email || !password">
+        {{ loading ? 'Ingresando...' : 'Ingresar' }}
+      </button>
+    </form>
+
+    <a routerLink="/" class="back-link">Volver al sitio</a>
+  </section>
+</main>

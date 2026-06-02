@@ -1,0 +1,188 @@
+<main class="admin-page">
+  <section class="admin-header">
+    <div>
+      <span class="eyebrow">Panel de control</span>
+      <h1>Administrador Kitsune</h1>
+      <p>Actualiza promociones, menu, contacto y pedidos desde un solo lugar.</p>
+    </div>
+
+    <div class="header-actions">
+      <button type="button" class="ghost-button" (click)="resetContent()">Restaurar contenido</button>
+      <button type="button" class="ghost-button" (click)="logout()">Cerrar sesion</button>
+    </div>
+  </section>
+
+  @if (notice) {
+    <div class="notice">{{ notice }}</div>
+  }
+
+  <section class="admin-section">
+    <div class="section-heading">
+      <div>
+        <h2>Carrusel</h2>
+        <p>{{ carouselImages.length }} imagenes activas. Minimo permitido: {{ minCarouselImages }}.</p>
+      </div>
+    </div>
+
+    <form class="inline-form" (ngSubmit)="addCarouselImage()">
+      <input type="url" name="newCarouselImage" [(ngModel)]="newCarouselImage" placeholder="/Carrusel/nueva-imagen.jpg">
+      <button type="submit">Agregar imagen</button>
+    </form>
+
+    <label class="file-upload">
+      <span>{{ uploadingCarousel ? 'Subiendo imagen...' : 'Subir imagen desde computadora' }}</span>
+      <input type="file" accept="image/*" (change)="uploadCarouselImage($event)" [disabled]="uploadingCarousel">
+    </label>
+
+    <div class="carousel-admin-grid">
+      @for (image of carouselImages; track image; let index = $index) {
+        <article class="image-tile">
+          <img [src]="image" alt="Imagen del carrusel">
+          <div class="tile-footer">
+            <span>{{ image }}</span>
+            <button type="button" (click)="removeCarouselImage(index)" [disabled]="carouselImages.length <= minCarouselImages">
+              Eliminar
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="admin-section">
+    <div class="section-heading">
+      <div>
+        <h2>Menu</h2>
+        <p>Agrega, elimina y edita productos por categoria.</p>
+      </div>
+    </div>
+
+    <nav class="admin-tabs">
+      @for (section of menu; track section.categoria) {
+        <button
+          type="button"
+          [class.active]="activeCategory === section.categoria"
+          (click)="activeCategory = section.categoria">
+          {{ section.categoria }}
+        </button>
+      }
+    </nav>
+
+    @for (section of menu; track section.categoria) {
+      @if (activeCategory === section.categoria) {
+        <div class="menu-editor">
+          <div class="category-tools">
+            <h3>{{ section.categoria }}</h3>
+            <button type="button" (click)="addProduct(section)">Agregar producto</button>
+          </div>
+
+          @for (product of section.platillos; track product.id) {
+            <article class="product-editor">
+              <div class="product-image">
+                @if (product.imagenUrl) {
+                  <img [src]="product.imagenUrl" [alt]="product.nombre">
+                } @else {
+                  <span>Sin imagen</span>
+                }
+                <label class="file-upload small">
+                  <span>{{ uploadingProductId === product.id ? 'Subiendo...' : 'Subir imagen' }}</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    (change)="uploadProductImage($event, product)"
+                    [disabled]="uploadingProductId === product.id">
+                </label>
+              </div>
+
+              <div class="product-fields">
+                <label>
+                  Producto
+                  <input type="text" [(ngModel)]="product.nombre" [name]="'nombre-' + product.id" (blur)="saveMenu()">
+                </label>
+
+                <label>
+                  Precio
+                  <input type="number" min="0" step="1" [(ngModel)]="product.precio" [name]="'precio-' + product.id" (blur)="saveMenu()">
+                </label>
+
+                <label class="wide">
+                  Imagen
+                  <input type="url" [(ngModel)]="product.imagenUrl" [name]="'imagen-' + product.id" (blur)="saveMenu()">
+                </label>
+
+                <label class="wide">
+                  Descripcion
+                  <textarea [(ngModel)]="product.descripcion" [name]="'descripcion-' + product.id" (blur)="saveMenu()"></textarea>
+                </label>
+              </div>
+
+              <button type="button" class="delete-button" (click)="removeProduct(section, product)">Eliminar</button>
+            </article>
+          }
+        </div>
+      }
+    }
+  </section>
+
+  <section class="admin-section two-column">
+    <div>
+      <div class="section-heading">
+        <div>
+          <h2>Contacto</h2>
+          <p>Datos visibles en la pagina de contacto.</p>
+        </div>
+      </div>
+
+      <form class="stacked-form" (ngSubmit)="saveContact()">
+        <label>
+          Numero de atencion
+          <input type="tel" name="telefonoAtencion" [(ngModel)]="contact.telefonoAtencion">
+        </label>
+
+        <label>
+          Horario
+          <input type="text" name="horario" [(ngModel)]="contact.horario">
+        </label>
+
+        <label>
+          Ubicacion
+          <textarea name="ubicacion" [(ngModel)]="contact.ubicacion"></textarea>
+        </label>
+
+        <label>
+          Link de mapa
+          <input type="url" name="mapaUrl" [(ngModel)]="contact.mapaUrl">
+        </label>
+
+        <div class="social-editor">
+          @for (red of contact.redesSociales; track red.nombre) {
+            <label>
+              {{ red.nombre }}
+              <input type="url" [(ngModel)]="red.url" [name]="'red-' + red.nombre">
+            </label>
+          }
+        </div>
+
+        <button type="submit">Guardar contacto</button>
+      </form>
+    </div>
+
+    <div>
+      <div class="section-heading">
+        <div>
+          <h2>Pedidos</h2>
+          <p>WhatsApp donde se enviaran las ordenes.</p>
+        </div>
+      </div>
+
+      <form class="stacked-form" (ngSubmit)="saveOrderPhone()">
+        <label>
+          Numero para pedidos
+          <input type="tel" name="orderPhone" [(ngModel)]="orderPhone" placeholder="5216182753560">
+        </label>
+
+        <button type="submit">Guardar numero</button>
+      </form>
+    </div>
+  </section>
+</main>

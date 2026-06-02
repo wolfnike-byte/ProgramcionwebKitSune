@@ -1,0 +1,47 @@
+<div class="cart-overlay" [class.active]="isOpen" (click)="cerrar()"></div>
+
+<div class="cart-sidebar" [class.active]="isOpen">
+  <div class="cart-header">
+    <div class="header-title">
+      <h2>Mi Pedido</h2>
+      <span class="items-count" *ngIf="totalItems > 0">{{ totalItems }} productos</span>
+    </div>
+    <button class="close-btn" (click)="cerrar()" aria-label="Cerrar carrito">X</button>
+  </div>
+
+  <div class="cart-content">
+    <div *ngIf="items.length === 0" class="empty-cart">
+      <span class="empty-icon">SUSHI</span>
+      <p>Aun no te decides?<br>Nuestros rollos te esperan!</p>
+    </div>
+
+    <div *ngFor="let item of items" class="cart-item">
+      <div class="item-image" *ngIf="item.image">
+        <img [src]="item.image" [alt]="item.name">
+      </div>
+
+      <div class="item-details">
+        <div class="item-header">
+          <h4>{{ item.name }}</h4>
+          <button (click)="quitar(item.id)" class="btn-remove-x" title="Eliminar uno">X</button>
+        </div>
+        <p class="item-price">{{ item.price | currency }} x {{ item.quantity }}</p>
+      </div>
+
+      <div class="item-total">
+        {{ item.price * item.quantity | currency }}
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-footer" *ngIf="items.length > 0">
+    <div class="total-container">
+      <span class="label">Total a pagar:</span>
+      <span class="amount">{{ total | currency }}</span>
+    </div>
+    <button class="checkout-btn" (click)="procesarPedido()">
+      PROCESAR PEDIDO
+      <span class="arrow">&gt;</span>
+    </button>
+  </div>
+</div>

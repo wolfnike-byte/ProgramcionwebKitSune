@@ -1,0 +1,168 @@
+﻿/* Contenedor principal del Sidebar */
+.cart-sidebar {
+    position: fixed;
+    right: -450px; /* Escondido */
+    top: 0;
+    width: 400px;
+    height: 100vh;
+    background: #111;
+    color: white;
+    z-index: 2000;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.7);
+    border-left: 3px solid #ff6600;
+    
+    /* ESTO ES LO MÃS IMPORTANTE PARA EL SCROLL */
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-sidebar.active {
+    right: 0; /* Aparece */
+}
+
+/* El fondo oscuro que bloquea el resto de la web */
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+    z-index: 1999;
+    display: none;
+}
+.cart-overlay.active { display: block; }
+
+/* 1. ESTILO DEL ENCABEZADO (FIJO) */
+.cart-header {
+    padding: 25px;
+    background: #1a1a1a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    flex-shrink: 0; /* Evita que el header se aplaste */
+}
+.cart-header h2 { margin: 0; color: #ff6600; font-size: 1.6rem; }
+.items-count { font-size: 0.8rem; color: #888; }
+.close-btn { background: none; border: none; color: #666; font-size: 1.8rem; cursor: pointer; transition: 0.2s; }
+.close-btn:hover { color: #ff4444; }
+
+/* 2. ESTILO DEL CONTENIDO (EL QUE SE DESLIZA) */
+.cart-content {
+    flex: 1; /* Ocupa todo el espacio restante */
+    overflow-y: auto; /* ACTIVA EL SCROLL SI HAY MUCHOS PLATILLOS */
+    padding: 20px;
+}
+
+/* PersonalizaciÃ³n de la barra de scroll (Solo Chrome/Edge/Safari) */
+.cart-content::-webkit-scrollbar { width: 6px; }
+.cart-content::-webkit-scrollbar-track { background: #111; }
+.cart-content::-webkit-scrollbar-thumb { background: #ff6600; border-radius: 10px; }
+
+/* Estilo de cada platillo en la lista */
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #222;
+}
+.item-image img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
+.item-details { flex: 1; }
+.item-details h4 { margin: 0; font-size: 1rem; color: #eee; }
+.item-price { margin: 5px 0; color: #888; font-size: 0.9rem; }
+.btn-remove { background: none; border: none; color: #ff4444; cursor: pointer; font-size: 0.8rem; padding: 0; }
+.item-total { font-weight: bold; color: #ff6600; }
+
+/* 3. ESTILO DEL PIE DE PÃGINA (FIJO ABAJO) */
+.cart-footer {
+    padding: 25px;
+    background: #1a1a1a;
+    border-top: 1px solid #333;
+    flex-shrink: 0; /* Evita que el footer se aplaste */
+}
+.total-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.total-container .label { font-size: 1.1rem; color: #ccc; }
+.total-container .amount { font-size: 1.6rem; font-weight: bold; color: #ff6600; }
+
+.checkout-btn {
+    width: 100%;
+    background: #ff6600;
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+.checkout-btn:hover { background: #e65c00; transform: translateY(-2px); }
+
+/* Mensaje de carrito vacÃ­o */
+.empty-cart { text-align: center; padding: 50px 20px; color: #555; }
+.empty-icon { font-size: 4rem; display: block; margin-bottom: 15px; }
+/* Ajuste en el contenedor del detalle para alinear la X */
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+/* ðŸ‘‡ ESTILO PARA EL NUEVO BOTÃ“N X */
+.btn-remove-x {
+    background: #222; /* Fondo oscuro sutil */
+    color: #666; /* Gris por defecto */
+    border: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%; /* Forma circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    flex-shrink: 0; /* Que no se aplaste si el nombre es largo */
+}
+
+.btn-remove-x:hover {
+    background: #ff4444; /* Rojo al pasar el mouse */
+    color: white;
+    transform: rotate(90deg); /* PequeÃ±o efecto visual de giro */
+}
+
+/* Ajuste adicional para que el nombre del platillo no choque con la X */
+.item-details h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #eee;
+    line-height: 1.2;
+    max-width: 180px; /* Evita que pise a la X */
+}
+/* Simbolos limpios del carrito */
+.checkout-btn .arrow {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.empty-icon {
+  color: #ff6600;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}

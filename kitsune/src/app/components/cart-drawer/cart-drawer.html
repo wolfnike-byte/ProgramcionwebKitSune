@@ -1,0 +1,36 @@
+<div class="cart-wrapper" [class.open]="isOpen">
+  <div class="cart-header">
+    <h2 class="cart-title">TU PEDIDO</h2>
+    <button class="close-icon-btn" (click)="close.emit()">×</button>
+  </div>
+
+  <div class="cart-body">
+    <p class="empty-msg" *ngIf="items.length === 0">Aún no has seleccionado delicias.</p>
+
+    <div class="cart-items-list" *ngIf="items.length > 0">
+      <div class="cart-item-card" *ngFor="let item of items">
+        <div class="item-img">
+          <img [src]="item.image" [alt]="item.name">
+        </div>
+        <div class="item-details">
+          <span class="item-name">{{ item.name }}</span>
+          <div class="item-price-row">
+            <span class="item-qty">x{{ item.quantity }}</span>
+            <span class="item-price">${{ item.price * item.quantity }}</span>
+          </div>
+        </div>
+        <button class="btn-remove" (click)="removeItem(item)">×</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-footer">
+    <div class="total-row">
+      <span class="label">TOTAL</span>
+      <span class="total-amount">${{ calculateTotal() }}</span>
+    </div>
+    <button class="btn-confirm" (click)="enviarWhatsApp()" [disabled]="items.length === 0">
+      PEDIR POR WHATSAPP
+    </button>
+  </div>
+</div>
