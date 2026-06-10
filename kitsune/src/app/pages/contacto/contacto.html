@@ -1,0 +1,54 @@
+﻿<main class="contacto-wrapper">
+  <section class="contacto-header">
+    <div class="container">
+      <h1 class="main-title">CONTACTO <span class="highlight">KITSUNE</span></h1>
+      <p class="subtitle">Conectamos contigo para llevar la experiencia gastronomica al siguiente nivel.</p>
+    </div>
+  </section>
+
+  <section class="contacto-info">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="icon-box">💬</div>
+          <h3>Atencion al Cliente</h3>
+          <p>¿Tienes dudas, quejas o sugerencias? Mandanos un mensaje y te atenderemos lo mas pronto posible.</p>
+          <a [href]="whatsappUrl" target="_blank" class="data-link contact-button">{{ contact.telefonoAtencion }}</a>
+        </div>
+        
+
+        <div class="info-card">
+          <div class="icon-box">🕒</div>
+          <h3>Horario</h3>
+          <p>Visitanos de martes a domingo.</p>
+          <span class="data-link">{{ contact.horario }}</span>
+        </div>
+
+        <div class="info-card">
+          <div class="icon-box">📍</div>
+          <h3>Ubicacion Central</h3>
+          <p>
+            {{ contact.ubicacion }}
+          </p>
+          <a [href]="contact.mapaUrl" target="_blank" class="data-link map-link">
+            Ver mapa de acceso
+          </a>
+        </div>
+
+        <div class="info-card">
+          <div class="icon-box">📱</div>
+          <h3>Siguenos</h3>
+          <p>Siguenos en nuestras redes sociales.</p>
+          <div class="social-links compact-socials">
+            @for (red of contact.redesSociales; track red.nombre) {
+              <a [href]="red.url" target="_blank" [attr.aria-label]="red.nombre" class="social-link">
+                <img [src]="red.icono" [alt]="red.nombre">
+              </a>
+            }
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

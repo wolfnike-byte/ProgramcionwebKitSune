@@ -1,0 +1,99 @@
+﻿/* Estilos globales o de app.component.css */
+.main-content {
+  padding-top: 80px; /* Ajusta esto a la altura exacta de tu Navbar */
+  min-height: 100vh;
+  background-color: #000;
+}
+
+/* Forzamos que la Navbar estÃ© siempre arriba */
+app-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+/* ESTILOS DEL FOOTER GLOBAL */
+.main-footer {
+  background-color: #0a0a0a; /* Un negro muy profundo */
+  color: #ffffff;
+  padding: 50px 20px 20px;
+  text-align: center;
+  border-top: 2px solid #ff6600; /* La lÃ­nea naranja caracterÃ­stica de tu diseÃ±o */
+  margin-top: 50px; /* Empuja el footer hacia abajo para que no se pegue al contenido */
+}
+
+.footer-logo {
+  color: #ff6600;
+  font-size: 1.8rem;
+  margin: 0 0 10px 0;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.footer-slogan {
+  font-style: italic;
+  color: #cccccc;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.footer-info {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  color: #888888;
+  font-size: 0.95rem;
+  margin-bottom: 40px;
+  flex-wrap: wrap; /* Para que se acomode bien en celulares */
+}
+
+.footer-bottom {
+  border-top: 1px solid #222222;
+  padding-top: 20px;
+  font-size: 0.8rem;
+  color: #555555;
+}
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.footer-nav a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.footer-nav a:hover {
+  color: #ff6600;
+}
+
+.footer-nav span {
+  color: #ff6600;
+}
+
+.footer-copy {
+  margin-top: 22px;
+  color: #777;
+  font-size: 0.82rem;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 650px) {
+  .footer-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-nav span {
+    display: none;
+  }
+}

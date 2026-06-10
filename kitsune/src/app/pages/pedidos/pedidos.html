@@ -1,0 +1,106 @@
+﻿<main class="pedidos-page">
+  <section class="pedidos-card">
+    <div class="pedidos-header">
+      <h1>Finalizar pedido</h1>
+      <p>Elige como quieres recibir tu pedido y completa tus datos.</p>
+    </div>
+
+    @if (items.length === 0) {
+      <div class="pedido-vacio">
+        <h2>Tu carrito esta vacio</h2>
+        <p>Agrega productos desde el menu antes de procesar tu pedido.</p>
+        <a routerLink="/menu" class="btn-volver">Ir al menu</a>
+      </div>
+    } @else {
+      <div class="opciones-entrega">
+        <button
+          type="button"
+          [class.activo]="tipoEntrega === 'domicilio'"
+          (click)="tipoEntrega = 'domicilio'">
+          Envio a domicilio
+        </button>
+
+        <button
+          type="button"
+          [class.activo]="tipoEntrega === 'pickup'"
+          (click)="tipoEntrega = 'pickup'">
+          Pick Up
+        </button>
+      </div>
+
+      <form class="form-pedido" #pedidoForm="ngForm" (ngSubmit)="enviarPedidoWhatsApp()" novalidate>
+        <label>
+          Nombre completo
+          <input
+            type="text"
+            name="nombre"
+            [(ngModel)]="nombre"
+            required
+            minlength="3">
+        </label>
+
+        <label>
+          Numero de telefono
+          <input
+            type="tel"
+            name="telefono"
+            [(ngModel)]="telefono"
+            (input)="normalizarTelefono()"
+            inputmode="numeric"
+            maxlength="10"
+            pattern="[0-9]{10}"
+            required>
+        </label>
+
+        @if (tipoEntrega === 'domicilio') {
+          <label>
+            Domicilio
+            <textarea
+              name="domicilio"
+              [(ngModel)]="domicilio"
+              required
+              minlength="9"></textarea>
+          </label>
+        }
+
+        @if (tipoEntrega === 'pickup') {
+          <label>
+            Dia de recoleccion
+            <input
+              type="date"
+              name="diaPickup"
+              [(ngModel)]="diaPickup"
+              required>
+          </label>
+        }
+
+        <section class="resumen-pedido">
+          <h2>Resumen del pedido</h2>
+
+          @for (item of items; track item.id) {
+            <div class="resumen-item">
+              <span>{{ item.quantity }} x {{ item.name }}</span>
+              <strong>${{ item.price * item.quantity }}</strong>
+            </div>
+          }
+
+          @if (tipoEntrega === 'domicilio') {
+            <div class="resumen-item envio-pendiente">
+              <span>Envio</span>
+              <strong>Por definir</strong>
+            </div>
+          }
+
+          <div class="resumen-total">
+            <span>Total</span>
+            <strong>${{ total }}</strong>
+          </div>
+        </section>
+
+        <button type="submit" class="btn-whatsapp" [disabled]="!formularioValido()">
+          Enviar pedido por WhatsApp
+        </button>
+      </form>
+    }
+  </section>
+</main>

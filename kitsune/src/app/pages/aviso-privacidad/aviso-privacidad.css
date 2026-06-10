@@ -1,0 +1,45 @@
+﻿.aviso-page {
+  min-height: 100vh;
+  padding: 140px 20px 70px;
+  background: transparent;
+  color: white;
+}
+
+.aviso-card {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 42px;
+  background: rgba(0, 0, 0, 0.78);
+  border: 1px solid rgba(255, 102, 0, 0.28);
+  line-height: 1.8;
+}
+
+.aviso-card h1 {
+  color: #ff6600;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.fecha {
+  color: #d4af37;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.aviso-card h2 {
+  color: #ff6600;
+  margin: 28px 0 10px;
+  font-size: 1.35rem;
+}
+
+.aviso-card p {
+  color: #e5e5e5;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 650px) {
+  .aviso-card {
+    padding: 28px 22px;
+  }
+}

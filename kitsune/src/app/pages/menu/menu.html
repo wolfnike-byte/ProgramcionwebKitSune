@@ -1,0 +1,50 @@
+﻿<main class="menu-container">
+  <h1 class="titulo-principal">NUESTRO MENU</h1>
+
+  <nav class="tabs-categorias">
+    @for (seccion of menuPorSecciones; track seccion.categoria) {
+      <button 
+        class="tab-btn" 
+        [class.activo]="categoriaActiva === seccion.categoria"
+        (click)="cambiarCategoria(seccion.categoria)">
+        {{ seccion.categoria }}
+      </button>
+    }
+  </nav>
+
+  @for (seccion of menuPorSecciones; track seccion.categoria) {
+    
+    @if (categoriaActiva === seccion.categoria) {
+      
+      <div class="seccion-menu fade-in">
+        <h2 class="titulo-categoria">{{ seccion.categoria }}</h2>
+        
+        <section class="grid-platillos">
+          @for (platillo of seccion.platillos; track platillo.id) {
+            
+            <article class="tarjeta-platillo">
+              <div class="imagen-contenedor">
+                <img [src]="platillo.imagenUrl" [alt]="platillo.nombre">
+              </div>
+
+              <div class="info-platillo">
+                <h3>{{ platillo.nombre }}</h3>
+                <p class="descripcion">{{ platillo.descripcion }}</p>
+                
+                <div class="compra-contenedor">
+                  <span class="precio">${{ platillo.precio }}</span>
+                  <button class="btn-carrito" (click)="agregarAlCarrito(platillo)">
+                    AGREGAR AL CARRITO
+                  </button>
+                </div>
+              </div>
+            </article>
+
+          }
+        </section>
+      </div>
+      
+    }
+    
+  }
+</main>
