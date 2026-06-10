@@ -30,7 +30,7 @@ export class AdminLoginComponent {
     const error = await this.adminAuth.login(this.email, this.password);
     this.loading = false;
 
-    if (error) {
+    if (error !== undefined && error !== null) {
       this.errorMessage = error; 
       return;
     }
